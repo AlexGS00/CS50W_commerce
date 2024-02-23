@@ -1,0 +1,20 @@
+body {
+    padding: 10px;
+}
+
+.listing {
+    border: 2px solid rgb(62, 60, 60);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0px 10px;
+}
+
+.listing-img {
+    max-width: 100%;
+    width: auto;
+    border-radius: 10px;
+}
+
+.listing-text {
+    color: blue;
+}

@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Listing: {{listing.title}}</h1>
+    <img src="{{listing.photo_url}}">
+    <div>{{listing.description}}</div>
+    <div>{{listing.category}}</div>
+    <div>Current bid: {{listing.bid}}</div>
+    <div class="row">
+        <div class="col-md-3">
+            <a href={%url "add_watchlist" listing.id%}><button class="btn btn-primary">Add to watchlist</button></a>
+        </div>
+    </div>
+    <h3>Comments:</h3>
+    {%for comment in comments%}
+    <div class="border">
+        <div>{{comment.text}}</div>
+        <div class="row">
+            <div class="col-6">- {{comment.user.username}}</div>
+            <div class="col-6">{{comment.creation_date}}</div>
+        </div>
+    </div>
+    {%endfor%}
+    <h4>Write a comment:</h4>
+    <form action={%url "listing" listing.id%} method="post">
+        {% csrf_token %}
+        <textarea placeholder="Write your comment here" name="comment" autofocus rows="6" cols="100" required></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+</div>
+{% endblock body %}
