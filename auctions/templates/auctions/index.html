@@ -1,24 +1,34 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+    <div class="d-flex flex-row flex-wrap ms-2 mb-4">
+        {%for category in categories%}
+        <a href={%url "category" category%}><button class="btn button">{{category}}</button></a>
+        {%endfor%}
+    </div>
     <h2>Active Listings</h2>
     <br>
-
-    {% for listing in listings %}
-    <div class="listing">
-        <a href={% url 'listing' listing.id%}>
-        <div class="row">
-            <div class="col-lg-3"><img src="{{listing.photo_url}}" alt="No photo" class="listing-img"></div>
-            <div class="col-lg-9">
-                <h3> {{listing.title}} </h3>
-                <div>Category: {{listing.category}}</div>  
-                <div class="listing-text">{{listing.description}}</div>
-                <div>Starting bid: {{listing.bid}}$</div>
-                <div>Publish date: {{listing.creation_date}}</div>
-            </div>
+    <div class="d-flex flex-row flex-wrap justify-content-center">
+        {% for listing in listings %}
+        <div class="listing my-4 mx-2 d-flex">
+            <a href={% url 'listing' listing.id%} class="w-100">
+                {%if listing.photo_url%}
+                <div class="text-center p-3" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <img src="{{listing.photo_url}}" alt="No photo" class="listing-img align-self-center">
+                </div>
+                {%endif%}
+                <div class="col-lg-9 listing-text">
+                    <h3> {{listing.title}} </h3>
+                    <div>Category: {{listing.category}}</div>  
+                    <div>Description: {{listing.preview_description}}</div>
+                    <div>Year: {{listing.year}}</div>
+                    <div>Starting bid: {{listing.bid}}$</div>
+                    <div>Publish date: {{listing.creation_date}}</div>
+                </div>
+            </a>
         </div>
-    </a>
-    </div>
+        
     <br>
     {% endfor %}
+    </div>
 {% endblock %}

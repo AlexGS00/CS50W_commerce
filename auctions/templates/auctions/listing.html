@@ -2,19 +2,43 @@
 
 {% block body %}
 <div class="container">
+    {% if winner %}
+        <h1>This bid has been won by {{ winner.username }}</h1>
+    {% endif %}
     <h1>Listing: {{listing.title}}</h1>
-    <img src="{{listing.photo_url}}">
-    <div>{{listing.description}}</div>
-    <div>{{listing.category}}</div>
-    <div>Current bid: {{listing.bid}}</div>
     <div class="row">
-        <div class="col-md-3">
-            <a href={%url "add_watchlist" listing.id%}><button class="btn btn-primary">Add to watchlist</button></a>
+        <div class="col-6 my-3">
+            <div class="photo-container d-flex align-self-center justify-content-center">
+                <img class="listing-img" src="{{listing.photo_url}}">
+            </div>
+        </div>        
+        <div class="list-txt-cont col-6 my-3">
+            <div><span class="list-point">Name:</span> {{listing.title}}</div>
+            <div><span class="list-point">Description:</span> {{listing.description}}</div>
+            <div><span class="list-point">Category:</span> {{listing.category}}</div>
+            <div><span class="list-point">Manufacturing year:</span> {{listing.year}}</div>
+            <div><span class="list-point">Starting bid:</span> ${{listing.bid}}</div>
+            <div><span class="list-point">Highest bid:</span> ${{highest_bid}}</div>
         </div>
+</div>
+    <div class="row mt-3">
+       <div class="d-flex flex-wrap flex-row">
+            <a href={%url "add_watchlist" listing.id%}><button class="btn btn-primary mx-3">Add to watchlist</button></a>
+        {% if creator%}
+            <a href={%url "close" listing.id%}><button class="btn btn-danger mx-2">Close auction</button></a>
+        {% endif %}
+       </div>
     </div>
+    <br>
+    <div>{{msg}}</div>
+    <form action={%url "bid" listing.id%} method="post" class="d-flex flex-row flex-wrap align-items-center">
+        {% csrf_token %}
+        <input type="number" placeholder="Bid amount" autocomplete="off" id="bid" name="bid" min="0">
+        <button type="submit" class="btn btn-primary">Place bid</button>
+    </form>
     <h3>Comments:</h3>
     {%for comment in comments%}
-    <div class="border">
+    <div class="comment">
         <div>{{comment.text}}</div>
         <div class="row">
             <div class="col-6">- {{comment.user.username}}</div>
@@ -25,7 +49,7 @@
     <h4>Write a comment:</h4>
     <form action={%url "listing" listing.id%} method="post">
         {% csrf_token %}
-        <textarea placeholder="Write your comment here" name="comment" autofocus rows="6" cols="100" required></textarea>
+        <textarea placeholder="Write your comment here" name="comment" rows="6" cols="100" required></textarea>
         <br>
         <button type="submit" class="btn btn-primary">Comment</button>
     </form>

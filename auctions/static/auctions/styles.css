@@ -7,14 +7,68 @@ body {
     border-radius: 10px;
     padding: 10px;
     margin: 0px 10px;
+    width: 400px;
 }
 
 .listing-img {
     max-width: 100%;
+    max-height: 100%;
     width: auto;
     border-radius: 10px;
 }
 
 .listing-text {
-    color: blue;
+    color: black;
+}
+
+.photo-container{
+    width:auto;
+    height:400px;
+    padding: 10px;
+}
+a:hover{
+    text-decoration: none;
+}
+
+.button{
+    color: white;
+    background-color: rgb(241, 205, 150);
+    border: none;
+    border-radius: 10px;
+    margin: 10px 15px;
+}
+
+.list-txt-cont{
+    font-size: 18px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 30px;
+}
+
+.list-point{
+    font-size: 20px;
+    font-weight: 600;
+    font-style: oblique;
+}
+
+input{
+    padding: 5px 10px;
+    border: 1px solid rgb(79, 79, 79);
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 15px 20px 15px 10px;
+}
+
+.comment{
+    border: 2px solid cadetblue;
+    border-radius: 10px;
+    padding: 3px 10px;
+    margin: 10px;
+}
+
+textarea{
+    padding: 5px 10px;
+    margin: 10px;
+    padding: 3px 10px;
+    border: 2px solid black;
+    border-radius: 10px;
 }
